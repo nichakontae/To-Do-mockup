@@ -30,7 +30,7 @@ const Login = () => {
               // border: "1px solid white",
               width: "calc(100% - (100%/2 - 80px))",
               height: "100%",
-              padding: "1.5rem 1rem",
+              padding: "1.5rem 2rem",
             }}
           >
             <Title text="Welcome Back" />
