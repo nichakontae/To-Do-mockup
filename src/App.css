@@ -1,6 +1,7 @@
 .App {
   text-align: center;
   /* background: linear-gradient(180deg, #6366f1 0%, #c4c5f5 100%); */
+  /* align-items: ; */
 }
 
 @media (prefers-reduced-motion: no-preference) {
