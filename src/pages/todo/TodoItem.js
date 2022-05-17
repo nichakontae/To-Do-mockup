@@ -23,9 +23,7 @@ const TodoItem = ({ task, date, doneOr, onClick }) => {
         </Stack>
         <Stack direction="row" alignItems="center">
           <EventNoteIcon />
-          <Typography sx={{ marginLeft: "10px" }}>
-            2022-04-29T10:59-0500
-          </Typography>
+          <Typography sx={{ marginLeft: "10px" }}>{date}</Typography>
         </Stack>
         <Stack direction="row" alignItems="center">
           <img

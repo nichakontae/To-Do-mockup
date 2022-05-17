@@ -10,8 +10,8 @@ const Todos = () => {
   const [countDone, setCountDone] = useState(0);
   const [countUndone, setCountUndone] = useState(0);
 
-  const addTodo = (task) => {
-    setTodo([{ label: task, date: new Date(), done: false }, ...todo]);
+  const addTodo = (task, date) => {
+    setTodo([{ label: task, date: date, done: false }, ...todo]);
   };
   const create = () => {
     setAdd(add + 1);
@@ -79,7 +79,11 @@ const Todos = () => {
           {todo.map((todos, index) => {
             return (
               <Grid item xs={12} md={6} key={index}>
-                <TodoItem task={todos.label} onClick={doneTask} />
+                <TodoItem
+                  task={todos.label}
+                  onClick={doneTask}
+                  date={todos.date}
+                />
               </Grid>
             );
           })}

@@ -3,6 +3,7 @@ import { Box, Container, Stack, Typography, Button } from "@mui/material";
 import Title from "./Title";
 import Input from "./Input";
 import TextBottom from "./TextBottom";
+import { Link } from "react-router-dom";
 
 const InputPart = () => {
   return (
@@ -25,17 +26,22 @@ const InputPart = () => {
         <Input type="text" label="EMAIL OR PHONE NUMBER" />
         <Input type="password" label="PASSWORD" />
         <TextBottom text="Forget your password" color="#0095D2" />
+        <Box sx={{ width: "100%" }}>
+          <Link to="/todos" style={{ textDecoration: "none" }}>
+            <Button
+              sx={{
+                backgroundColor: "#505CEA",
+                color: "white",
+                fontWeight: "bold",
+                marginTop: "10px",
+                width: "100%",
+              }}
+            >
+              Login
+            </Button>
+          </Link>
+        </Box>
 
-        <Button
-          sx={{
-            backgroundColor: "#505CEA",
-            color: "white",
-            fontWeight: "bold",
-            marginTop: "10px",
-          }}
-        >
-          Login
-        </Button>
         <Stack direction="row">
           <TextBottom text="Need an account?" color="#C5C5C5" />
           &nbsp;

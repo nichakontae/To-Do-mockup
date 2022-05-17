@@ -1,6 +1,8 @@
 import React from "react";
 import { Box, Container, Stack, Typography, Button } from "@mui/material";
 import NavbarItem from "./NavbarItem";
+import { Link } from "react-router-dom";
+import "./navbar.css";
 
 const Navbar = () => {
   return (
@@ -21,13 +23,16 @@ const Navbar = () => {
           justifyContent="space-between"
           height="54px"
         >
-          <Stack direction="row" alignItems="center">
-            <img src="assets/logo.png" alt="logo" height="40" />
-            <Typography>Due Today, Do Tomorrow</Typography>
-          </Stack>
+          <Link to="/todos" style={{ textDecoration: "none" }}>
+            <Stack direction="row" alignItems="center" className="logo">
+              <img src="assets/logo.png" alt="logo" height="40" />
+              <Typography>Due Today, Do Tomorrow</Typography>
+            </Stack>
+          </Link>
+
           <Box>
-            <NavbarItem text="Login" />
-            <NavbarItem text="Home" />
+            <NavbarItem text="Login" to="/" />
+            <NavbarItem text="Home" to="/todos" />
           </Box>
         </Stack>
       </Container>

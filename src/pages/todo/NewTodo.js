@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Button, TextField } from "@mui/material";
+import moment from "moment";
 
 const NewTodo = ({ addTodo, create }) => {
   const [task, setTask] = useState("");
@@ -27,7 +28,7 @@ const NewTodo = ({ addTodo, create }) => {
       />
       <Button
         onClick={() => {
-          addTodo(task);
+          addTodo(task, moment().format("lll"));
           create();
         }}
       >
