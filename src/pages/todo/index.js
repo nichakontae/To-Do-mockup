@@ -7,12 +7,25 @@ import TodoItem from "./TodoItem";
 const Todos = () => {
   const [todo, setTodo] = useState([]);
   const [add, setAdd] = useState(0);
+  const [countDone, setCountDone] = useState(0);
+  const [countUndone, setCountUndone] = useState(0);
 
   const addTodo = (task) => {
     setTodo([{ label: task, date: new Date(), done: false }, ...todo]);
   };
   const create = () => {
     setAdd(add + 1);
+    setCountUndone(countUndone + 1);
+  };
+
+  const doneTask = (doneHa) => {
+    if (doneHa === true) {
+      setCountDone(countDone - 1);
+      setCountUndone(countUndone + 1);
+    } else {
+      setCountDone(countDone + 1);
+      setCountUndone(countUndone - 1);
+    }
   };
 
   return (
@@ -40,31 +53,33 @@ const Todos = () => {
       >
         <Typography variant="h2">What you need to do?</Typography>
         <NewTodo addTodo={addTodo} create={create} />
-        <Stack direction="row" justifyContent="center">
-          <TodoList text="To-dos" times={add} />
-          <TodoList text="Done Tasks" times={0} />
-          <TodoList text="Undone Tasks" times={0} />
-        </Stack>
+
+        <Grid
+          container
+          rowSpacing={1}
+          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Grid item xs={12} md={3}>
+            <TodoList text="To-dos" times={add} />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <TodoList text="Done Tasks" times={countDone} />
+          </Grid>
+          <Grid item xs={12} md={3}>
+            <TodoList text="Undone Tasks" times={countUndone} />
+          </Grid>
+        </Grid>
 
         <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-          {/* <Grid item xs={12} md={6}>
-            <TodoItem
-              task="TODODODOD"
-              date="2022-04-29T10:59-0500"
-              doneOr="false"
-            />
-          </Grid>
-          <Grid item xs={12} md={6}>
-            <TodoItem
-              task="TODODODOD"
-              date="2022-04-29T10:59-0500"
-              doneOr="false"
-            />
-          </Grid> */}
           {todo.map((todos, index) => {
             return (
-              <Grid item xs={12} md={6}>
-                <TodoItem task={todos.label} key={index} />
+              <Grid item xs={12} md={6} key={index}>
+                <TodoItem task={todos.label} onClick={doneTask} />
               </Grid>
             );
           })}

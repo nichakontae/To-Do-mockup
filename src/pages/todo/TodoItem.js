@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import styled from "./todoitem.module.css";
 
-const TodoItem = ({ task, date, doneOr }) => {
+const TodoItem = ({ task, date, doneOr, onClick }) => {
   const [done, setDone] = useState(false);
   // const [click, setClick] = useState(false);
 
@@ -12,7 +12,10 @@ const TodoItem = ({ task, date, doneOr }) => {
   return (
     <Box
       className={done ? styled.done_box : styled.undone_box}
-      onClick={handleClick}
+      onClick={() => {
+        handleClick();
+        onClick(done);
+      }}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
         <Stack direction="row" alignItems="center">
