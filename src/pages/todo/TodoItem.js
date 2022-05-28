@@ -3,18 +3,29 @@ import React, { useState } from "react";
 import EventNoteIcon from "@mui/icons-material/EventNote";
 import styled from "./todoitem.module.css";
 
-const TodoItem = ({ task, date, doneOr, onClick }) => {
-  const [done, setDone] = useState(false);
+const TodoItem = ({ task, date, isDone, settodo, todo, id }) => {
+  const [done, setDone] = useState(isDone);
   // const [click, setClick] = useState(false);
 
-  const handleClick = () => setDone(!done);
-
+  // const handleClick = () => setDone(!done);
+  const toggle = () => {
+    settodo(
+      todo.map((el) => {
+        if (el.id === id) {
+          el.isDone = !el.isDone;
+          // setDone(el.isDone);
+        }
+        return el;
+      })
+    );
+  };
   return (
     <Box
-      className={done ? styled.done_box : styled.undone_box}
+      className={isDone ? styled.done_box : styled.undone_box}
       onClick={() => {
-        handleClick();
-        onClick(done);
+        // handleClick();
+        // onClick(done);
+        toggle();
       }}
     >
       <Stack direction="row" justifyContent="space-between" alignItems="center">
@@ -27,11 +38,11 @@ const TodoItem = ({ task, date, doneOr, onClick }) => {
         </Stack>
         <Stack direction="row" alignItems="center">
           <img
-            alt={done ? "done" : "undone"}
-            src={done ? "assets/done.png" : "assets/undone.png"}
+            alt={isDone ? "done" : "undone"}
+            src={isDone ? "assets/done.png" : "assets/undone.png"}
           />
           <Typography sx={{ marginLeft: "10px" }}>
-            {done ? "Done" : "Undone"}
+            {isDone ? "Done" : "Undone"}
           </Typography>
         </Stack>
       </Stack>

@@ -1,36 +1,39 @@
 import React, { useState } from "react";
-import { Typography, Box, Grid, Stack } from "@mui/material";
+import { Typography, Box, Grid } from "@mui/material";
 import NewTodo from "./NewTodo";
 import TodoList from "./TodoList";
 import TodoItem from "./TodoItem";
 
 const Todos = () => {
   const [todo, setTodo] = useState([]);
-  const [add, setAdd] = useState(0);
-  const [countDone, setCountDone] = useState(0);
-  const [countUndone, setCountUndone] = useState(0);
+  // const [add, setAdd] = useState(0);
+  // const [countDone, setCountDone] = useState(0);
+  // const [countUndone, setCountUndone] = useState(0);
 
   const addTodo = (task, date) => {
-    setTodo([{ label: task, date: date, done: false }, ...todo]);
+    setTodo([
+      { label: task, date: date, isDone: false, id: Math.random() },
+      ...todo,
+    ]);
   };
-  const create = () => {
-    setAdd(add + 1);
-    setCountUndone(countUndone + 1);
-  };
+  // const create = () => {
+  //   setAdd(add + 1);
+  //   setCountUndone(countUndone + 1);
+  // };
 
-  const doneTask = (doneHa) => {
-    if (doneHa === true) {
-      setCountDone(countDone - 1);
-      setCountUndone(countUndone + 1);
-    } else {
-      setCountDone(countDone + 1);
-      setCountUndone(countUndone - 1);
-    }
-  };
+  // const doneTask = (doneHa) => {
+  //   if (doneHa === true) {
+  //     setCountDone(countDone - 1);
+  //     setCountUndone(countUndone + 1);
+  //   } else {
+  //     setCountDone(countDone + 1);
+  //     setCountUndone(countUndone - 1);
+  //   }
+  // };
 
   return (
     <Box
-      height="100vh"
+      height="100%"
       width="100%"
       sx={{
         background: "linear-gradient(180deg, #6366f1 0%,  #c4c5f5 100%)",
@@ -42,7 +45,7 @@ const Todos = () => {
     >
       <Box
         sx={{
-          marginTop: "50px",
+          marginTop: "90px",
           backgroundColor: "#F7F7F7",
           height: "calc(100vh - 180px)",
           width: "calc(100% - 60px)",
@@ -52,7 +55,7 @@ const Todos = () => {
         }}
       >
         <Typography variant="h2">What you need to do?</Typography>
-        <NewTodo addTodo={addTodo} create={create} />
+        <NewTodo addTodo={addTodo} />
 
         <Grid
           container
@@ -65,13 +68,19 @@ const Todos = () => {
           }}
         >
           <Grid item xs={12} md={3}>
-            <TodoList text="To-dos" times={add} />
+            <TodoList text="To-dos" times={todo.length} />
           </Grid>
           <Grid item xs={12} md={3}>
-            <TodoList text="Done Tasks" times={countDone} />
+            <TodoList
+              text="Done Tasks"
+              times={todo.filter((el) => el.isDone === true).length}
+            />
           </Grid>
           <Grid item xs={12} md={3}>
-            <TodoList text="Undone Tasks" times={countUndone} />
+            <TodoList
+              text="Undone Tasks"
+              times={todo.filter((el) => el.isDone === false).length}
+            />
           </Grid>
         </Grid>
 
@@ -80,9 +89,13 @@ const Todos = () => {
             return (
               <Grid item xs={12} md={6} key={index}>
                 <TodoItem
+                  id={todos.id}
                   task={todos.label}
-                  onClick={doneTask}
+                  // onClick={doneTask}
                   date={todos.date}
+                  isDone={todos.isDone}
+                  settodo={setTodo}
+                  todo={todo}
                 />
               </Grid>
             );

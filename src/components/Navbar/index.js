@@ -14,6 +14,7 @@ const Navbar = () => {
         color: "rgb(0,0,0)",
         position: "fixed",
         width: "100%",
+        zIndex: "1",
       }}
     >
       <Container>
